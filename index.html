@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MediGuard AI - AI-assisted medicine verification system. Verify packaging, batch numbers, and barcodes before consumption.">
+    <title>MediGuard AI | Verify Before You Consume</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#home" class="logo" aria-label="MediGuard AI Home">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                    </svg>
+                </div>
+                <span class="logo-text">MediGuard<span class="logo-accent">AI</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="nav-links" id="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#scan" class="nav-link">Scan</a>
+                <a href="#history" class="nav-link">History</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Demo Mode Toggle Switch -->
+                <div class="demo-toggle-container" title="Toggle between local demo mode & live FastAPI backend">
+                    <span class="demo-label">Demo Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="demo-mode-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <a href="#scan" class="btn btn-primary btn-sm nav-scan-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+                    <span>Scan Medicine</span>
+                </a>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="hamburger" id="hamburger-btn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+        <nav class="mobile-nav-links">
+            <a href="#home" class="mobile-nav-link">Home</a>
+            <a href="#scan" class="mobile-nav-link">Scan Medicine</a>
+            <a href="#history" class="mobile-nav-link">Verification History</a>
+            <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
+            <a href="#about" class="mobile-nav-link">About & Safety</a>
+        </nav>
+        <div class="mobile-drawer-footer">
+            <a href="#scan" class="btn btn-primary btn-full mobile-drawer-btn">Start Scanning</a>
+        </div>
+    </div>
+
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="home">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span>AI-Powered Medical Safety Shield</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Don't Just Identify Your Medicine. <span class="text-gradient">Verify It.</span>
+                    </h1>
+                    <p class="hero-subheading">
+                        AI-assisted medicine verification using package analysis, barcode checks, batch verification, and explainable risk assessment.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#scan" class="btn btn-primary btn-lg">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            <span>Scan Medicine</span>
+                        </a>
+                        <a href="#how-it-works" class="btn btn-secondary btn-lg">
+                            <span>How It Works</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Visual Hero Card Demo -->
+                <div class="hero-visual">
+                    <div class="card verification-demo-card">
+                        <div class="card-header-flex">
+                            <span class="card-tag">Sample Scan</span>
+                            <span class="status-pill status-low">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                LOW RISK
+                            </span>
+                        </div>
+                        <div class="med-info-hero">
+                            <div class="med-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="med-title">Paracetamol 500mg</h3>
+                                <p class="med-mfg">MediCare Pharma</p>
+                            </div>
+                        </div>
+
+                        <div class="demo-meta-grid">
+                            <div class="meta-item">
+                                <span class="meta-label">Batch No.</span>
+                                <span class="meta-value">PCM25001</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Risk Score</span>
+                                <span class="meta-value score-text-low">12 / 100</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-progress-bar">
+                            <div class="progress-fill low-fill" style="width: 12%;"></div>
+                        </div>
+
+                        <div class="demo-verification-list">
+                            <div class="check-item-mini valid"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Packaging layout matched</div>
+                            <div class="check-item-mini valid"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Registered batch active</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Scan Section -->
+        <section class="section scan-section" id="scan">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Verify Your Medicine</h2>
+                    <p class="section-subtitle">Select a method below to initiate package analysis and authenticity checks.</p>
+                </div>
+
+                <div class="card scan-card">
+                    <!-- Scanner Mode Selector Buttons -->
+                    <div class="scan-options-grid">
+                        <button class="scan-opt-btn primary-opt" id="btn-open-camera">
+                            <div class="opt-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                            </div>
+                            <span class="opt-title">Use Camera</span>
+                            <span class="opt-sub">Live mobile/web scanner</span>
+                        </button>
+
+                        <button class="scan-opt-btn" id="btn-trigger-upload">
+                            <div class="opt-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            </div>
+                            <span class="opt-title">Upload Image</span>
+                            <span class="opt-sub">JPG, PNG, or WEBP</span>
+                        </button>
+
+                        <button class="scan-opt-btn" id="btn-trigger-barcode">
+                            <div class="opt-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/><path d="M12 7v10"/></svg>
+                            </div>
+                            <span class="opt-title">Scan Barcode</span>
+                            <span class="opt-sub">2D / 1D Data Matrix</span>
+                        </button>
+                    </div>
+
+                    <!-- Hidden File Input supporting rear camera upload fallback -->
+                    <input type="file" id="file-input" accept="image/*" capture="environment" class="hidden-input">
+
+                    <!-- File Drop / Drag Area -->
+                    <div class="drag-drop-zone" id="drop-zone">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+                        <p class="drop-text">Drag and drop your medicine package image here, or <span class="browse-link">browse files</span></p>
+                    </div>
+
+                    <!-- Image Preview Area -->
+                    <div class="preview-wrapper hidden" id="preview-wrapper">
+                        <div class="preview-container">
+                            <img id="image-preview" src="" alt="Medicine Package Preview">
+                            <button class="remove-preview-btn" id="btn-remove-preview" title="Remove image">&times;</button>
+                        </div>
+                        
+                        <!-- Demo Preset Buttons for quick Hackathon Testing -->
+                        <div class="demo-preset-container" id="demo-preset-container">
+                            <span class="preset-label">Hackathon Demo Scenarios:</span>
+                            <div class="preset-buttons">
+                                <button type="button" class="btn-chip active" id="preset-low-risk">Test Case: Authentic (Low Risk)</button>
+                                <button type="button" class="btn-chip" id="preset-high-risk">Test Case: Counterfeit (High Risk)</button>
+                            </div>
+                        </div>
+
+                        <div class="preview-actions">
+                            <button class="btn btn-primary btn-lg" id="btn-analyze-med">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <span>Analyze Medicine</span>
+                            </button>
+                            <button class="btn btn-secondary" id="btn-change-image">Choose Another Image</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading / Verification Pipeline Modal & State -->
+        <div class="loading-overlay hidden" id="loading-overlay">
+            <div class="loading-card card">
+                <div class="pipeline-header">
+                    <div class="spinner"></div>
+                    <h3>Analyzing Package...</h3>
+                    <p>MediGuard AI vision pipeline is evaluating package authenticity.</p>
+                </div>
+
+                <div class="pipeline-steps" id="pipeline-steps">
+                    <div class="pipeline-step" data-step="1">
+                        <span class="step-icon">○</span>
+                        <span class="step-text">Image received</span>
+                    </div>
+                    <div class="pipeline-step" data-step="2">
+                        <span class="step-icon">○</span>
+                        <span class="step-text">Reading medicine information (OCR)</span>
+                    </div>
+                    <div class="pipeline-step" data-step="3">
+                        <span class="step-icon">○</span>
+                        <span class="step-text">Checking manufacturer records</span>
+                    </div>
+                    <div class="pipeline-step" data-step="4">
+                        <span class="step-icon">○</span>
+                        <span class="step-text">Verifying batch & expiry data</span>
+                    </div>
+                    <div class="pipeline-step" data-step="5">
+                        <span class="step-icon">○</span>
+                        <span class="step-text">Checking barcode consistency</span>
+                    </div>
+                    <div class="pipeline-step" data-step="6">
+                        <span class="step-icon">○</span>
+                        <span class="step-text">Calculating risk assessment</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section (Appears after analysis) -->
+        <section class="section result-section hidden" id="result-section">
+            <div class="container">
+                <div class="result-header text-center">
+                    <span class="badge-tag">Verification Complete</span>
+                    <h2 class="section-title">Medicine Verification Report</h2>
+                </div>
+
+                <div class="result-grid">
+                    <!-- Left: Details & Score Card -->
+                    <div class="card result-card-main">
+                        <div class="result-card-header">
+                            <div>
+                                <h3 class="res-med-name" id="res-med-name">Paracetamol 500mg</h3>
+                                <p class="res-med-mfg" id="res-med-mfg">MediCare Pharma</p>
+                            </div>
+                            <div id="res-status-pill-container">
+                                <!-- Status pill injected dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="res-meta-table">
+                            <div class="res-meta-row">
+                                <span class="meta-lbl">Batch Number</span>
+                                <span class="meta-val" id="res-batch">PCM25001</span>
+                            </div>
+                            <div class="res-meta-row">
+                                <span class="meta-lbl">Expiry Date</span>
+                                <span class="meta-val" id="res-expiry">10 Jan 2027</span>
+                            </div>
+                            <div class="res-meta-row">
+                                <span class="meta-lbl">AI Confidence</span>
+                                <span class="meta-val" id="res-confidence">94%</span>
+                            </div>
+                        </div>
+
+                        <hr class="divider">
+
+                        <!-- Circular Gauge for Risk Score -->
+                        <div class="risk-gauge-container">
+                            <div class="gauge-wrapper">
+                                <svg class="gauge-svg" viewBox="0 0 120 120">
+                                    <circle class="gauge-bg" cx="60" cy="60" r="50"></circle>
+                                    <circle class="gauge-fill" id="gauge-fill-circle" cx="60" cy="60" r="50" stroke-dasharray="314.15" stroke-dashoffset="314.15"></circle>
+                                </svg>
+                                <div class="gauge-text">
+                                    <span class="gauge-score" id="res-score-num">0</span>
+                                    <span class="gauge-label">/ 100</span>
+                                </div>
+                            </div>
+                            <div class="gauge-info">
+                                <h4>Risk Score Assessment</h4>
+                                <p id="res-score-description">Calculating overall risk based on OCR text clarity, manufacturer database match, and batch structure.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Verification Checks & Reasoning -->
+                    <div class="card result-card-side">
+                        <h3 class="side-card-title">Verification Checks</h3>
+                        <div class="checks-list" id="res-checks-list">
+                            <!-- Injected dynamically -->
+                        </div>
+
+                        <hr class="divider">
+
+                        <div class="explainable-reasoning-card">
+                            <h4 class="reason-title">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                Why This Result?
+                            </h4>
+                            <ul class="reasons-ul" id="res-reasons-list">
+                                <!-- Injected dynamically -->
+                            </ul>
+                        </div>
+
+                        <div class="recommendation-box" id="res-recommendation-box">
+                            <p class="rec-text" id="res-recommendation-text">Information appears consistent. For high-risk medicines, verify through an authorized source.</p>
+                        </div>
+
+                        <div class="result-actions">
+                            <button class="btn btn-primary btn-full" id="btn-show-passport">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/></svg>
+                                <span>View Verification Passport</span>
+                            </button>
+                            <button class="btn btn-secondary btn-full" id="btn-scan-another">
+                                <span>Scan Another Medicine</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital Verification Passport Modal -->
+        <div class="modal-overlay hidden" id="passport-modal">
+            <div class="modal-card passport-card">
+                <button class="modal-close-btn" id="btn-close-passport">&times;</button>
+                
+                <div class="passport-header">
+                    <div class="passport-brand">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span>MEDIGUARD PASSPORT</span>
+                    </div>
+                    <span class="passport-id" id="pass-id">ID: VG-92831</span>
+                </div>
+
+                <div class="passport-body">
+                    <div class="pass-field-group">
+                        <span class="pass-lbl">Medicine Name</span>
+                        <span class="pass-val bold" id="pass-med">Paracetamol 500mg</span>
+                    </div>
+
+                    <div class="pass-grid-2">
+                        <div class="pass-field-group">
+                            <span class="pass-lbl">Manufacturer</span>
+                            <span class="pass-val" id="pass-mfg">MediCare Pharma</span>
+                        </div>
+                        <div class="pass-field-group">
+                            <span class="pass-lbl">Batch Number</span>
+                            <span class="pass-val" id="pass-batch">PCM25001</span>
+                        </div>
+                        <div class="pass-field-group">
+                            <span class="pass-lbl">Expiry Date</span>
+                            <span class="pass-val" id="pass-expiry">10 Jan 2027</span>
+                        </div>
+                        <div class="pass-field-group">
+                            <span class="pass-lbl">Verification Date</span>
+                            <span class="pass-val" id="pass-date">13 August 2026</span>
+                        </div>
+                    </div>
+
+                    <div class="pass-status-box" id="pass-status-box">
+                        <!-- Dynamic risk tag in passport -->
+                    </div>
+
+                    <div class="pass-checks-summary">
+                        <span class="summary-title">Passed Checks:</span>
+                        <div class="pass-chips" id="pass-chips-container">
+                            <!-- Dynamic check chips -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="passport-footer">
+                    <button class="btn btn-primary btn-full" id="btn-share-passport">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        <span>Share Verification</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Camera Scanner Modal -->
+        <div class="modal-overlay hidden" id="camera-modal">
+            <div class="modal-card camera-card">
+                <button class="modal-close-btn" id="btn-close-camera">&times;</button>
+                <h3>Camera Scanner</h3>
+                <p class="camera-instruction">Position the medicine package inside the viewport frame</p>
+
+                <div class="video-container">
+                    <video id="camera-video" autoplay playsinline muted></video>
+                    <div class="scanner-frame">
+                        <div class="laser-line"></div>
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                    </div>
+                    <canvas id="camera-canvas" class="hidden"></canvas>
+                </div>
+
+                <div class="camera-error-msg hidden" id="camera-error-msg">
+                    <p>Camera unavailable or permission denied. Please upload an image file instead.</p>
+                </div>
+
+                <div class="camera-actions">
+                    <button class="btn btn-primary btn-lg btn-full" id="btn-capture-camera">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                        <span>Capture Package</span>
+                    </button>
+                    <button class="btn btn-secondary btn-full" id="btn-cancel-camera">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <section class="section history-section" id="history">
+            <div class="container">
+                <div class="section-header-flex">
+                    <div>
+                        <h2 class="section-title">Verification History</h2>
+                        <p class="section-subtitle">Local log of recently scanned medicine packages.</p>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" id="btn-clear-history">Clear History</button>
+                </div>
+
+                <div class="history-grid" id="history-container">
+                    <!-- Dynamic History Cards render here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="section how-it-works-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">How MediGuard AI Works</h2>
+                    <p class="section-subtitle">Four seamless steps to transparent risk evaluation.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="card step-card">
+                        <span class="step-num">01</span>
+                        <div class="step-icon-wrap">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                        </div>
+                        <h3>SCAN</h3>
+                        <p>Upload or capture medicine packaging via camera or barcode reader.</p>
+                    </div>
+
+                    <div class="card step-card">
+                        <span class="step-num">02</span>
+                        <div class="step-icon-wrap">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <h3>EXTRACT</h3>
+                        <p>AI extracts medicine name, manufacturer, batch number, and expiration date.</p>
+                    </div>
+
+                    <div class="card step-card">
+                        <span class="step-num">03</span>
+                        <div class="step-icon-wrap">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3>VERIFY</h3>
+                        <p>Extracted information is cross-checked against registered database records.</p>
+                    </div>
+
+                    <div class="card step-card">
+                        <span class="step-num">04</span>
+                        <div class="step-icon-wrap">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3>ASSESS</h3>
+                        <p>MediGuard generates an explainable risk score and actionable safety guidelines.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section class="section tech-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Core Technology</h2>
+                    <p class="section-subtitle">Multi-layered analysis designed for high precision assessment.</p>
+                </div>
+
+                <div class="tech-chips-grid">
+                    <div class="tech-chip-card">
+                        <div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg></div>
+                        <span>AI Computer Vision</span>
+                    </div>
+                    <div class="tech-chip-card">
+                        <div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h3"/><path d="M20 7V4h-3"/><path d="M4 17v3h3"/><path d="M20 17v3h-3"/></svg></div>
+                        <span>Optical Character Recognition (OCR)</span>
+                    </div>
+                    <div class="tech-chip-card">
+                        <div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h.01"/><path d="M17 7h.01"/><path d="M7 17h.01"/><path d="M17 17h.01"/><path d="M12 7v10"/></svg></div>
+                        <span>Barcode & DataMatrix Engine</span>
+                    </div>
+                    <div class="tech-chip-card">
+                        <div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+                        <span>Batch Structure Verification</span>
+                    </div>
+                    <div class="tech-chip-card">
+                        <div class="tech-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                        <span>Explainable Risk Engine</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="section about-section" id="about">
+            <div class="container">
+                <div class="card about-card">
+                    <div class="about-header">
+                        <span class="card-tag">Prototype / Hackathon Project</span>
+                        <h2>About MediGuard AI</h2>
+                    </div>
+                    <p class="about-text">
+                        MediGuard AI is an AI-assisted medicine verification prototype designed to help users identify potentially suspicious medicine packages through visual layout checks, manufacturer directory lookup, and batch formatting rules.
+                    </p>
+                    
+                    <div class="safety-disclaimer-box">
+                        <div class="disclaimer-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                            <span>Medical Safety Disclaimer</span>
+                        </div>
+                        <p class="disclaimer-body">
+                            MediGuard provides an AI-assisted verification assessment and does not guarantee medicine authenticity. Always verify suspicious medicines with an authorized pharmacist, manufacturer, or relevant regulatory authority.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#home" class="logo">
+                    <div class="logo-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <span class="logo-text">MediGuard<span class="logo-accent">AI</span></span>
+                </a>
+                <p class="footer-tagline">"Verify Before You Consume"</p>
+            </div>
+
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#scan">Scan</a>
+                <a href="#history">History</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 MediGuard AI. TEAM BYTEFORGE. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script Import -->
+    <script src="script.js"></script>
+</body>
+</html>

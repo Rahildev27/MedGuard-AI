@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Paracetamol 500mg",
+    "manufacturer": "Cipla Pharmaceuticals",
+    "batch_number": "PARACIP-500",
+    "expiry_date": "2027-01-10",
+    "barcode": "8901234567890",
+    "active": true
+  },
+  {
+    "name": "Cetirizine 10mg",
+    "manufacturer": "HealthPlus Laboratories",
+    "batch_number": "CTZ26011",
+    "expiry_date": "2028-03-15",
+    "barcode": "8901234567891",
+    "active": true
+  },
+  {
+    "name": "Amoxicillin 500mg",
+    "manufacturer": "MediCare Pharma",
+    "batch_number": "AMX26005",
+    "expiry_date": "2027-06-20",
+    "barcode": "8901234567892",
+    "active": true
+  },
+  {
+    "name": "Ibuprofen 400mg",
+    "manufacturer": "HealthPlus Laboratories",
+    "batch_number": "IBU26007",
+    "expiry_date": "2028-02-12",
+    "barcode": "8901234567893",
+    "active": true
+  },
+  {
+    "name": "Azithromycin 500mg",
+    "manufacturer": "NovaCare Pharmaceuticals",
+    "batch_number": "AZM25019",
+    "expiry_date": "2027-09-30",
+    "barcode": "8901234567894",
+    "active": true
+  },
+  {
+    "name": "Omeprazole 20mg",
+    "manufacturer": "NovaCare Pharmaceuticals",
+    "batch_number": "OMP26014",
+    "expiry_date": "2028-01-25",
+    "barcode": "8901234567895",
+    "active": true
+  },
+  {
+    "name": "Pantoprazole 40mg",
+    "manufacturer": "MediCare Pharma",
+    "batch_number": "PNT26021",
+    "expiry_date": "2028-04-18",
+    "barcode": "8901234567896",
+    "active": true
+  },
+  {
+    "name": "Metformin 500mg",
+    "manufacturer": "HealthPlus Laboratories",
+    "batch_number": "MET26009",
+    "expiry_date": "2027-12-10",
+    "barcode": "8901234567897",
+    "active": true
+  },
+  {
+    "name": "Loratadine 10mg",
+    "manufacturer": "NovaCare Pharmaceuticals",
+    "batch_number": "LOR26003",
+    "expiry_date": "2028-05-22",
+    "barcode": "8901234567898",
+    "active": true
+  },
+  {
+    "name": "Vitamin D3 1000IU",
+    "manufacturer": "Wellness Labs",
+    "batch_number": "VD326018",
+    "expiry_date": "2029-01-15",
+    "barcode": "8901234567899",
+    "active": true
+  }
+]
