@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, Request
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.c
+ors import CORSMiddleware
 
 from pathlib import Path
 from datetime import date
